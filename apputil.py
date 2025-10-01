@@ -146,7 +146,7 @@ def visualize_families():
 
     df = family_groups().copy()
     df['pclass'] = df['pclass'].astype(str)
-    fig2 = px.bar(
+    fig = px.bar(
         df,
         x='family_size',
         y='avg_fare',
@@ -162,5 +162,5 @@ def visualize_families():
         },
         title='Average fare paid by class and family size'
     )
-    return fig2
+    return fig
 
