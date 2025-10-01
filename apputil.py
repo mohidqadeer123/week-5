@@ -102,10 +102,10 @@ def survival_demographics():
 
 def family_groups1():
 
-'''
+"""
 Group the passengers by family size and passenger class
 
-'''
+"""
     # Load Titanic dataset
     df = pd.read_csv('https://raw.githubusercontent.com/leontoddjohnson/datasets/main/data/titanic.csv')
     df.columns = df.columns.str.lower()
@@ -124,6 +124,43 @@ Group the passengers by family size and passenger class
         .reset_index()  
     )
     # Return a table with these results, sorted so that the values are clear and easy to interpret (for example, by class and then family size).
+
     return out.sort_values(by=['pclass', 'family_size'])
 
+def last_names():
 
+"""
+extracts the last name of each passenger from the Name column, and returns the count for each last name
+
+"""
+    # Load Titanic dataset
+    df = pd.read_csv('https://raw.githubusercontent.com/leontoddjohnson/datasets/main/data/titanic.csv')
+    df.columns = df.columns.str.lower()
+
+    last = df['name'].str.split(',').str[0].str.strip()
+
+    return last.value_counts()
+
+# Create a Plotly visualization in a function named visualize_families() that directly addresses your question. 
+def visualize_families():
+
+    df = family_groups().copy()
+    df['pclass'] = df['pclass'].astype(str)
+    fig2 = px.bar(
+        df,
+        x='family_size',
+        y='avg_fare',
+        color='pclass',
+        barmode='group',
+        category_orders={
+            'pclass': [1, 2, 3],
+        },
+        labels={
+            'family_size': 'Family Size',
+            'avg_fare': 'Average Fare',
+            'pclass': 'Passenger Class'
+        },
+        title='Average fare paid by class and family size'
+    )
+    return fig2
+    
