@@ -74,10 +74,9 @@ def survival_demographics():
     # Create a Plotly visualization in a function named visualize_demographic() that directly addresses your question by returning a Plotly figure (e.g., fig = px. ...).
 
  def visualize_demographic():
-     '''
+    """
     Returns ploty figure for question
-
-    '''
+    """
     df = survival_demographics()
     fig = px.bar(
         df,
@@ -102,10 +101,10 @@ def survival_demographics():
 
 def family_groups1():
 
-"""
-Group the passengers by family size and passenger class
+    """
+    Group the passengers by family size and passenger class
 
-"""
+    """
     # Load Titanic dataset
     df = pd.read_csv('https://raw.githubusercontent.com/leontoddjohnson/datasets/main/data/titanic.csv')
     df.columns = df.columns.str.lower()
@@ -129,10 +128,10 @@ Group the passengers by family size and passenger class
 
 def last_names():
 
-"""
-extracts the last name of each passenger from the Name column, and returns the count for each last name
+    """
+    extracts the last name of each passenger from the Name column, and returns the count for each last name
 
-"""
+    """
     # Load Titanic dataset
     df = pd.read_csv('https://raw.githubusercontent.com/leontoddjohnson/datasets/main/data/titanic.csv')
     df.columns = df.columns.str.lower()
@@ -163,4 +162,4 @@ def visualize_families():
         title='Average fare paid by class and family size'
     )
     return fig2
-    
+

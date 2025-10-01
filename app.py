@@ -10,7 +10,7 @@ st.write(
 # Titanic Visualization 1
 
 '''
-"my question is: How does survival rate vary by age, gender, and class?"
+"Question: How does survival rate vary by age, gender, and class?"
 
 )
 # Generate and display the figure
@@ -21,7 +21,7 @@ st.write(
 '''
 # Titanic Visualization 2
 '''
-"My question is: what is the average fare paid by class and family size"
+"Question: what is the average fare paid by class and family size"
 
 )
 # Generate and display the figure
