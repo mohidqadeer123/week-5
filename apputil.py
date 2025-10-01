@@ -30,13 +30,13 @@ def survival_demographics():
     )
 
     # Aggregate actual passenger counts and survivors
-    grouped_obs = (
+    grouped = (
         df.groupby(['pclass', 'sex', 'age_group'])
-          .agg(
+        .agg(
               n_passengers=('survived', 'size'),
               n_survivors=('survived', 'sum')
-          )
-          .reset_index()
+            ) 
+        .reset_index()
     )
 
     # Build all possible combinations (3 classes × 2 sexes × 4 age groups = 24 rows)
@@ -70,3 +70,60 @@ def survival_demographics():
     grouped = grouped.sort_values(by=['pclass', 'sex', 'age_group'])
 
     return grouped
+
+    # Create a Plotly visualization in a function named visualize_demographic() that directly addresses your question by returning a Plotly figure (e.g., fig = px. ...).
+
+ def visualize_demographic():
+     '''
+    Returns ploty figure for question
+
+    '''
+    df = survival_demographics()
+    fig = px.bar(
+        df,
+        x='age_group',
+        y='survival_rate',
+        color='sex',
+        barmode='group',
+        facet_col='pclass',
+        category_orders={
+        'age_group': ['Child', 'Teen', 'Adult', 'Senior'],
+        'pclass': [1, 2, 3],
+        },
+        labels={
+            'age_group': 'Age Group',
+            'survival_rate': 'Survival Rate',}
+        )
+
+    return fig
+
+# Exercise 2
+# Using the Titanic dataset, write a function named family_groups() to explore the relationship between family size, passenger class, and ticket fare.
+
+def family_groups1():
+
+'''
+Group the passengers by family size and passenger class
+
+'''
+    # Load Titanic dataset
+    df = pd.read_csv('https://raw.githubusercontent.com/leontoddjohnson/datasets/main/data/titanic.csv')
+    df.columns = df.columns.str.lower()
+
+
+    # Create family_size column: siblings/spouses + parents/children + passenger
+    df['family_size'] = df['sibsp'] + df['parch'] + 1  
+    out = (
+         df.groupby(['family_size','pclass'])
+        .agg(
+            n_passengers=('survived', 'size'),
+            avg_fare=('fare', 'mean'),
+            min_fare=('fare', 'min'),
+            max_fare=('fare', 'max')
+        )
+        .reset_index()  
+    )
+    # Return a table with these results, sorted so that the values are clear and easy to interpret (for example, by class and then family size).
+    return out.sort_values(by=['pclass', 'family_size'])
+
+
